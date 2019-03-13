@@ -5,14 +5,14 @@ PImage groundhogImage;
 PImage soldierImage;
 PImage robotImage;
 
-int soldierx;
-int soldiery=floor(random(4))+1;
+int soldierX;
+int soldierY=floor(random(4))+1;
 
-float robotx=random(400)+80;
-int roboty=floor(random(4))+1;
+float robotX=random(400)+80;
+int robotY=floor(random(4))+1;
 
-float lightx=robotx+20;
-float lighty=480-80*roboty;
+float lightX=robotX+20;
+float lightY=480-80*robotY;
 float lightDistance;
 float lightSpeed;
 
@@ -62,17 +62,17 @@ void draw() {
   ellipse(590,50,100,100);
   
   //soldier
-  image(soldierImage,soldierx,480-80*soldiery);
-  soldierx+=3;
-  soldierx%=640;
+  image(soldierImage,soldierX,480-80*soldierY);
+  soldierX+=3;
+  soldierX%=640;
   
   //robot
-  image(robotImage,robotx,480-80*roboty);
+  image(robotImage,robotX,480-80*robotY);
   
   //light
   strokeWeight(10);
   stroke(255,0,0);
-  line(lightx-lightDistance,lighty+37,lightx-30-lightDistance,lighty+37);
-  lightSpeed=lightSpeed+2;
+  line(lightX-lightDistance,lightY+37,lightX-30-lightDistance,lightY+37);
+  lightSpeed+=2;
   lightDistance=lightSpeed%160; 
 }

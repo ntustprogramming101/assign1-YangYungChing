@@ -5,16 +5,16 @@ PImage groundhogImage;
 PImage soldierImage;
 PImage robotImage;
 
-int soldierX;
-int soldierY=floor(random(4))+1;
+int soldierX=-80;
+int soldierY=floor(random(2,6))*80;
 
-float robotX=random(400)+80;
-int robotY=floor(random(4))+1;
+float robotX=floor(random(3,8))*80;
+int robotY=floor(random(2,6))*80;
 
-float lightX=robotX+20;
-float lightY=480-80*robotY;
-float lightDistance;
-float lightSpeed;
+float lineX=robotX+25;
+float lineX1,lineX2,lightY,lineDistance;
+
+
 
 
 
@@ -56,23 +56,27 @@ void draw() {
   image(groundhogImage,280,80);
   
   //sun
-  fill(255,255,0);
-  ellipse(590,50,110,110);
-  fill(253,184,19);
-  ellipse(590,50,100,100);
+  fill(253, 184, 19);
+  stroke(255,255,0);
+  strokeWeight(5);
+  ellipse(590,50,120,120);
   
   //soldier
-  image(soldierImage,soldierX,480-80*soldierY);
+  image(soldierImage,soldierX,soldierY);
   soldierX+=3;
-  soldierX%=640;
+  if(soldierX>640){
+    soldierX=-80;
+  }
   
   //robot
-  image(robotImage,robotX,480-80*robotY);
+  image(robotImage,robotX,robotY);
   
   //light
   strokeWeight(10);
   stroke(255,0,0);
-  line(lightX-lightDistance,lightY+37,lightX-30-lightDistance,lightY+37);
-  lightSpeed+=2;
-  lightDistance=lightSpeed%160; 
+  lineDistance=(lineDistance-2)%160;
+  line(lineX1,robotY+37,lineX2,robotY+37);
+  lineX1=min(lineX,lineX+lineDistance);
+  lineX2=min(lineX,lineX1+40);
+  
 }
